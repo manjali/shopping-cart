@@ -1,0 +1,1 @@
+insert into stock_unit values('A123','Basket',100,4);
