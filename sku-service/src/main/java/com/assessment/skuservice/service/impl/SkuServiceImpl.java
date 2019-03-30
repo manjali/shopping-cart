@@ -6,6 +6,8 @@ import com.assessment.skuservice.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SkuServiceImpl implements SkuService {
 
@@ -16,5 +18,10 @@ public class SkuServiceImpl implements SkuService {
     @Override
     public StockUnit getSkuDetails(String skuId) {
         return skuRepository.findById(skuId);
+    }
+
+    @Override
+    public List<StockUnit> getInventory() {
+        return skuRepository.findAll();
     }
 }
