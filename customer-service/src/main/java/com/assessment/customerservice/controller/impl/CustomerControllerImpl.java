@@ -35,20 +35,31 @@ public class CustomerControllerImpl implements CustomerController {
     }
 
     @Override
-    public ResponseEntity viewCustomerInfo(String customerId) {
+    public CustomerInfo viewCustomerInfo(String customerId) {
 
         CustomerInfo customerInfo = customerService.getCustomerDetails(customerId);
 
         if(customerInfo!=null && customerInfo.getCustomerId()!=null){
-            return this.sendResponse(customerInfo);
+            return customerInfo;
         }
         else {
-            return new ResponseEntity<>("No stockWithId", HttpStatus.NO_CONTENT);
+            return null;
+            //return new ResponseEntity<>("No stockWithId", HttpStatus.NO_CONTENT);
         }
     }
 
     @Override
     public ResponseEntity addCustomerDetails(CustomerInfo customerinfo) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity addDummyCustomer(String customerid) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity editCustomerDetails(CustomerInfo customerinfo) {
         return null;
     }
 

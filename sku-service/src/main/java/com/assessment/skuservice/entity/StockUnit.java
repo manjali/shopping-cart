@@ -1,19 +1,22 @@
 package com.assessment.skuservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.javafx.beans.IDProperty;
 
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Entity(name="stock_unit")
+@Table(name="stock_unit")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StockUnit {
     @Id
     //@GeneratedValue
     private String id;
+    @Column(name="name_of_item")
     private String nameofItem;
     private long price;
+    @Column(name="number_of_items")
     private int numberOfItems;
 
     public StockUnit(){

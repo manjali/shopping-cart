@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface SkuService {
 
-    public StockUnit getSkuDetails(String skuId);
-    public List<StockUnit> getInventory();
+     StockUnit getSkuDetails(String skuId);
+     List<StockUnit> getInventory();
+    int getProductNumber(String skuId);
 }

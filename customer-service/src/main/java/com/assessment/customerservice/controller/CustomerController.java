@@ -17,8 +17,15 @@ public interface CustomerController {
     ResponseEntity viewAllCustomerInfo();
 
     @GetMapping(value="/view", params = {"customerId"},produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity viewCustomerInfo(String customerId);
+    CustomerInfo viewCustomerInfo(String customerId);
 
     @PostMapping(value="/addCustomer", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity addCustomerDetails(@RequestBody CustomerInfo customerinfo);
+
+    @PostMapping(value="/addCustomerwithId", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity addDummyCustomer(@RequestBody String customerid);
+
+    @PutMapping(value="/editCustomer", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity editCustomerDetails(@RequestBody CustomerInfo customerinfo);
+
 }

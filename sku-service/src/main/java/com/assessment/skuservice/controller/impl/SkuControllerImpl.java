@@ -54,21 +54,7 @@ SkuServiceImpl skuService;
     public ResponseEntity addSkuDetails(StockUnit provider) {
         return null;
     }
-    /*
-    1. to create an order first check if customer id is present from other service
-    2. check quatity of each item in list<stockunits>. maintain that list into a hashmap.
-    3. if all are available then success. else throw right exception.
-     */
 
-    @Override
-    public ResponseEntity createOrder(OrderInfo orderInfo) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity getCustomerOrders(String custId) {
-        return null;
-    }
 
     public ResponseEntity sendResponse(StockUnit stUnit){
         return new ResponseEntity<>(stUnit, HttpStatus.OK);

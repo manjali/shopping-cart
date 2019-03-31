@@ -21,9 +21,4 @@ public interface SkuController {
     @PostMapping(value="/addSku", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity addSkuDetails(@RequestBody StockUnit provider);
 
-    @PostMapping(value="/createOrder", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity createOrder(@RequestBody OrderInfo orderInfo);
-
-    @GetMapping(value="/viewOrderPerCustomer", params = {"custId"},produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity getCustomerOrders(String custId);
 }

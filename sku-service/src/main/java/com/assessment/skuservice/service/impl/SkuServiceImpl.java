@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SkuServiceImpl implements SkuService {
@@ -17,11 +18,18 @@ public class SkuServiceImpl implements SkuService {
 
     @Override
     public StockUnit getSkuDetails(String skuId) {
-        return skuRepository.findById(skuId);
+        Optional<StockUnit> stUnit = skuRepository.findById(skuId);
+        return stUnit.get();
     }
 
     @Override
     public List<StockUnit> getInventory() {
         return skuRepository.findAll();
     }
+
+    @Override
+    public int getProductNumber(String skuId) {
+        return 0;
+    }
+
 }
