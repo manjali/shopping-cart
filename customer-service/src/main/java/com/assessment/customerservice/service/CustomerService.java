@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface CustomerService {
 
-    public CustomerInfo getCustomerDetails(String skuId);
-    public List<CustomerInfo> getCustomerInventory();
+     CustomerInfo getCustomerDetails(String skuId);
+     List<CustomerInfo> getCustomerInventory();
+    int saveCustomer(CustomerInfo customerInfo);
+    int update(CustomerInfo customerInfo);
 }
 

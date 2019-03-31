@@ -114,7 +114,7 @@ public class OrderServiceImpl implements OrderService {
         String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "customer/addCustomerwithId";
         System.out.println("URL" + url);
         HttpEntity<String> request = new HttpEntity<>(custId);
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, request, String.class);
+        ResponseEntity<Integer> response = restTemplate.exchange(url, HttpMethod.POST, request, Integer.class);
         System.out.println("RESPONSE " + response);
         if(response.getStatusCode().equals(HttpStatus.OK)){
             return true;

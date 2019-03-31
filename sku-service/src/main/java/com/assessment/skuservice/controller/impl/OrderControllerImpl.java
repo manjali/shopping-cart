@@ -4,6 +4,8 @@ import com.assessment.skuservice.controller.OrderController;
 import com.assessment.skuservice.entity.OrderInfo;
 import com.assessment.skuservice.service.impl.OrderServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ public class OrderControllerImpl implements OrderController
     @Autowired
     OrderServiceImpl orderService;
 
+    private static final Logger LOGGER = LogManager.getLogger(OrderControllerImpl.class);
+
     /*
    1. to create an order first check if customer id is present from other service
    2. check quatity of each item in list<stockunits>. maintain that list into a hashmap.
@@ -27,6 +31,7 @@ public class OrderControllerImpl implements OrderController
         try {
             /*ObjectMapper objectMapper = new ObjectMapper();
             OrderInfo orderInfo = objectMapper.readValue(order, OrderInfo.class);*/
+            LOGGER.info("Creating a new Order");
             response = orderService.addOrder(orderInfo);
             if (response.equals("Success")) {
                 return new ResponseEntity("Created Order", HttpStatus.CREATED);
@@ -41,11 +46,13 @@ public class OrderControllerImpl implements OrderController
     }
 
     @Override
+    //TBD
     public ResponseEntity getCustomerOrders(String custId) {
         return null;
     }
 
     @Override
+    //TBD
     public ResponseEntity viewOrder(String custId) {
         return null;
     }

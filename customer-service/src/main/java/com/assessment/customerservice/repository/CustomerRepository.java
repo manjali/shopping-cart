@@ -23,4 +23,14 @@ public class CustomerRepository {
         List<CustomerInfo> customerInfos= jdbcTemplate.query("select * from customer_info",new CustomerUnitRowMapper());
         return customerInfos;
     }
+
+    public int save(CustomerInfo cInfo){
+        return jdbcTemplate.update("insert into customer_info(customer_id,address,contact_number,customer_name)"+" values(?,?,?,? )",
+                new Object[] { cInfo.getCustomerId(), cInfo.getAddress(), cInfo.getContactNumber(),cInfo.getCusomterName()});
+    }
+
+    public int update(CustomerInfo cInfo){
+        return jdbcTemplate.update("update customer_info set customer_id = ?,"+"address = ?,"+ " contact_number = ?,"+"customer_name = ?"+"where customer_id=?",
+                new Object[] { cInfo.getCustomerId(), cInfo.getAddress(), cInfo.getContactNumber(),cInfo.getCusomterName(),cInfo.getCustomerId()});
+    }
 }

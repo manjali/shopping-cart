@@ -6,6 +6,8 @@ import com.assessment.skuservice.entity.StockUnit;
 import com.assessment.skuservice.service.impl.SkuServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import java.util.List;
 @RestController
 public class SkuControllerImpl implements SkuController{
 
+    private static final Logger LOGGER = LogManager.getLogger(SkuControllerImpl.class);
+
 @Autowired
 SkuServiceImpl skuService;
 
@@ -29,8 +33,10 @@ SkuServiceImpl skuService;
         List<StockUnit> stockUnits = skuService.getInventory();
         if(stockUnits!=null) {
             try {
+                LOGGER.info("View all current records");
                 return new ResponseEntity(this.sendResponseList(stockUnits), HttpStatus.OK);
             } catch (JsonProcessingException e) {
+                LOGGER.error("Exception caught: "+e);
                 e.printStackTrace();
                 //handle this excpetion
             }
@@ -66,7 +72,7 @@ SkuServiceImpl skuService;
 
         }
         else{
-            System.out.println("----------");//generate error
+            LOGGER.error("NO stock units available");//generate error
         }
         return null;
     }

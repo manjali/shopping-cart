@@ -8,7 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -16,6 +19,8 @@ import java.util.List;
 public class CustomerControllerImpl implements CustomerController {
     @Autowired
     private CustomerServiceImpl customerService;
+
+    private static final Logger LOGGER = LogManager.getLogger(CustomerControllerImpl.class);
 
     @Autowired
     ObjectMapper objectMapper;
@@ -27,7 +32,7 @@ public class CustomerControllerImpl implements CustomerController {
             try {
                 return new ResponseEntity(this.sendResponseList(custUnits), HttpStatus.OK);
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                LOGGER.error("Error Processing Json::"+e);
                 //handle this excpetion
             }
         }
@@ -40,9 +45,11 @@ public class CustomerControllerImpl implements CustomerController {
         CustomerInfo customerInfo = customerService.getCustomerDetails(customerId);
 
         if(customerInfo!=null && customerInfo.getCustomerId()!=null){
+            LOGGER.info("Customer Info Found");
             return customerInfo;
         }
         else {
+            LOGGER.info("No Customer Info Found with given CustomerId");
             return null;
             //return new ResponseEntity<>("No stockWithId", HttpStatus.NO_CONTENT);
         }
@@ -54,13 +61,21 @@ public class CustomerControllerImpl implements CustomerController {
     }
 
     @Override
-    public ResponseEntity addDummyCustomer(String customerid) {
-        return null;
+    public Integer addDummyCustomer(@RequestBody String customerid) {
+        CustomerInfo custInfo = new CustomerInfo(customerid,"",000,"");
+        int customerInserted = customerService.saveCustomer(custInfo);
+        return new Integer(customerInserted);
     }
 
     @Override
     public ResponseEntity editCustomerDetails(CustomerInfo customerinfo) {
-        return null;
+        int customerInserted = customerService.update(customerinfo);
+        if(customerInserted > 0){
+            return new ResponseEntity("Customer Info successfully updated",HttpStatus.CREATED);
+        }
+        else
+            return new ResponseEntity("Customer Info not updated",HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
     public String sendResponseList(List<CustomerInfo> custUnits) throws JsonProcessingException {
@@ -69,7 +84,7 @@ public class CustomerControllerImpl implements CustomerController {
 
         }
         else{
-            System.out.println("----------");//generate error
+            LOGGER.info("Generate ERROR.........");;//generate error
         }
         return null;
     }

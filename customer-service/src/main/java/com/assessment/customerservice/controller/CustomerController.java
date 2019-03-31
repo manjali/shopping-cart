@@ -23,7 +23,7 @@ public interface CustomerController {
     ResponseEntity addCustomerDetails(@RequestBody CustomerInfo customerinfo);
 
     @PostMapping(value="/addCustomerwithId", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity addDummyCustomer(@RequestBody String customerid);
+    Integer addDummyCustomer(@RequestBody String customerid);
 
     @PutMapping(value="/editCustomer", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity editCustomerDetails(@RequestBody CustomerInfo customerinfo);
