@@ -58,8 +58,9 @@ public class CustomerControllerImpl implements CustomerController {
     }
 
     @Override
-    public ResponseEntity addCustomerDetails(CustomerInfo customerinfo) {
-        return null;
+    public Integer addCustomerDetails(CustomerInfo customerinfo) {
+        int customerInserted = customerService.saveCustomer(customerinfo);
+        return new Integer(customerInserted);
     }
 
     @Override

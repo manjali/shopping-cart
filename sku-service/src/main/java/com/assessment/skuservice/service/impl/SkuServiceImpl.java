@@ -32,4 +32,9 @@ public class SkuServiceImpl implements SkuService {
         return 0;
     }
 
+    @Override
+    public StockUnit addSku(StockUnit stUnit) {
+        return skuRepository.save(stUnit);
+    }
+
 }

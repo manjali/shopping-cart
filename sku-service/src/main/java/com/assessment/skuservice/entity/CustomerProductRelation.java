@@ -1,15 +1,19 @@
 package com.assessment.skuservice.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name="customer_product_relation")
 public class CustomerProductRelation {
 
 
-    @Id
+
+    @Column(name="customer_id")
     private String customerId;
 
+    @Id
+    @Column(name="order_id")
     private String orderId;
 
     public CustomerProductRelation() {

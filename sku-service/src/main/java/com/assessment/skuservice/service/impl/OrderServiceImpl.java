@@ -39,6 +39,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private OrderCustomerRepository orderCustomerRepository;
+
+    @Autowired
     private EurekaClient eurekaClient;
 
     @Autowired
@@ -149,6 +152,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderInfo viewOrder(String orderId) {
+        /*OrderInfo orderInfo = new OrderInfo();
+        String customerId = orderCustomerRepository.findCustomer(orderId);
+        orderInfo.setCustomerId(customerId);
+        orderInfo.setOrderId(orderId);
+
+        orderInfo.setStockunits(null);
+        //orderRepository.getOne() */
         return null;
     }
 }
