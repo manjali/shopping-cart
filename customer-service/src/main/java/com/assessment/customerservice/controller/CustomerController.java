@@ -20,7 +20,7 @@ public interface CustomerController {
     CustomerInfo viewCustomerInfo(String customerId);
 
     @PostMapping(value="/addCustomer", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity addCustomerDetails(@RequestBody CustomerInfo customerinfo);
+    Integer addCustomerDetails(@RequestBody CustomerInfo customerinfo);
 
     @PostMapping(value="/addCustomerwithId", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
     Integer addDummyCustomer(@RequestBody String customerid);

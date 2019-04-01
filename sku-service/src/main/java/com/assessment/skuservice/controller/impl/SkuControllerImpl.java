@@ -47,18 +47,30 @@ SkuServiceImpl skuService;
 
     @Override
     public ResponseEntity viewSkuDetails(String skuId) {
-        StockUnit stockUnit = skuService.getSkuDetails(skuId);
-        if(stockUnit.getNameofItem()!=null){
-            return this.sendResponse(stockUnit);
+        try {
+            StockUnit stockUnit = skuService.getSkuDetails(skuId);
+            if (stockUnit.getNameofItem() != null) {
+                return this.sendResponse(stockUnit);
+            } else {
+                LOGGER.error("Unable to add stockunits");
+                return new ResponseEntity<>("Unable to add stockunits", HttpStatus.NO_CONTENT);
+            }
         }
-        else {
-            return new ResponseEntity<>("No stockWithId", HttpStatus.NO_CONTENT);
+        catch (Exception e){
+            LOGGER.error("Unable to add stockunits "+e);
+            return new ResponseEntity<>("Unable to add stockunits", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @Override
     public ResponseEntity addSkuDetails(StockUnit provider) {
-        return null;
+        StockUnit st = skuService.addSku(provider);
+        if( st !=null ){
+            return this.sendResponse(st);
+        }
+        else {
+            return new ResponseEntity<>("Unable to add New StockUnits", HttpStatus.NO_CONTENT);
+        }
     }
 
 

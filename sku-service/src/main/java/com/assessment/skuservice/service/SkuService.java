@@ -9,4 +9,5 @@ public interface SkuService {
      StockUnit getSkuDetails(String skuId);
      List<StockUnit> getInventory();
     int getProductNumber(String skuId);
+    StockUnit addSku(StockUnit stUnit);
 }

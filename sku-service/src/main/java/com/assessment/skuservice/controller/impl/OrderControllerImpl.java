@@ -53,6 +53,8 @@ public class OrderControllerImpl implements OrderController
     @Override
     //TBD
     public ResponseEntity viewOrder(String custId) {
-        return null;
+         orderService.viewOrder(custId);
+         return null;
+
     }
 }

@@ -18,5 +18,5 @@ public interface OrderController {
     ResponseEntity getCustomerOrders(String custId);
 
     @GetMapping(value="/viewOrder", params = {"orderId"},produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity viewOrder(String custId);
+    ResponseEntity viewOrder(String orderId);
 }
