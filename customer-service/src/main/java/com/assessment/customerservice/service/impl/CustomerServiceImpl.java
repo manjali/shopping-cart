@@ -1,5 +1,6 @@
 package com.assessment.customerservice.service.impl;
 
+import com.assessment.customerservice.exception.InvalidResponseFromServiceException;
 import com.assessment.customerservice.model.CustomerInfo;
 import com.assessment.customerservice.repository.CustomerRepository;
 import com.assessment.customerservice.service.CustomerService;
@@ -21,8 +22,14 @@ public class CustomerServiceImpl implements CustomerService {
     private static final Logger LOGGER = LogManager.getLogger(CustomerServiceImpl.class);
 
     @Override
-    public CustomerInfo getCustomerDetails(String custId) {
-        return customerRepository.findById(custId);
+    public CustomerInfo getCustomerDetails(String custId) throws InvalidResponseFromServiceException{
+        CustomerInfo cInfo = customerRepository.findById(custId);
+         if(cInfo !=null){
+            return cInfo;
+
+        }
+        else
+            throw new InvalidResponseFromServiceException();
     }
 
     @Override
