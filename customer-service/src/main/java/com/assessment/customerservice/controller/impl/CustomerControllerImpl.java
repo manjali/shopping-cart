@@ -1,6 +1,7 @@
 package com.assessment.customerservice.controller.impl;
 
 import com.assessment.customerservice.controller.CustomerController;
+import com.assessment.customerservice.exception.InvalidResponseFromServiceException;
 import com.assessment.customerservice.model.CustomerInfo;
 import com.assessment.customerservice.service.impl.CustomerServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,17 +43,18 @@ public class CustomerControllerImpl implements CustomerController {
     @Override
     public CustomerInfo viewCustomerInfo(String customerId) {
 
-        CustomerInfo customerInfo = customerService.getCustomerDetails(customerId);
+        try {
+            CustomerInfo customerInfo = customerService.getCustomerDetails(customerId);
 
-        if(customerInfo!=null && customerInfo.getCustomerId()!=null){
-            LOGGER.info("Customer Info Found");
-            return customerInfo;
+            if (customerInfo != null && customerInfo.getCustomerId() != null) {
+                LOGGER.info("Customer Info Found");
+                return customerInfo;
+            }
         }
-        else {
-            LOGGER.info("No Customer Info Found with given CustomerId");
-            return null;
-            //return new ResponseEntity<>("No stockWithId", HttpStatus.NO_CONTENT);
-        }
+        catch(InvalidResponseFromServiceException e){
+            LOGGER.error("Failed to retrieve customer details");
+            }
+        return new CustomerInfo();
     }
 
     @Override

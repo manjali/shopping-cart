@@ -35,14 +35,13 @@ public class OrderControllerImpl implements OrderController
             response = orderService.addOrder(orderInfo);
             if (response.equals("Success")) {
                 return new ResponseEntity("Created Order", HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity("Order Creation Failed", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-
         } catch (Exception e) {
+            LOGGER.error(e.toString());
+        }
             return new ResponseEntity("Order Creation Failed", HttpStatus.INTERNAL_SERVER_ERROR);
 
-        }
+
     }
 
     @Override
